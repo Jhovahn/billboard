@@ -2,6 +2,7 @@ const express = require('express');
 const routes = require('express').Router();
 const axios = require('axios');
 const $ = require('cheerio');
+const path = require('path');
 require('dotenv').config();
 let latest = 'September 21, 2018';
 
@@ -13,6 +14,9 @@ const app = express();
 app.use(routes);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app
+  .use(express.static(path.join(__dirname, 'public')))
+  .set('views', path.join(__dirname, 'views'));
 
 const url = process.env.MONGO_URL;
 // const url = 'mongodb://jhovahn:password1@ds247852.mlab.com:47852/notes';
