@@ -14,10 +14,11 @@ const app = express();
 app.use(routes);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
 app
   .use(express.static(path.join(__dirname, 'public')))
-  .set('views', path.join(__dirname, 'views'))
-  .get('/', (req, res) => res.render('/public/index.html'));
+  .set('views', path.join(__dirname, 'public'))
+  .get('/', (req, res) => res.render('/public/index'));
 
 const url = process.env.MONGO_URL;
 // const url = 'mongodb://jhovahn:password1@ds247852.mlab.com:47852/notes';
