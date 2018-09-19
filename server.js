@@ -16,8 +16,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app
-  .use('/static', express.static(path.join(__dirname, 'public')))
-  .set('views', path.join(__dirname, 'public'))
+  .use('/static', express.static(path.join(__dirname, '/public')))
+  .set('view engine', 'html')
   .get('/', (req, res) => res.render('public'));
 
 const url = process.env.MONGO_URL;
