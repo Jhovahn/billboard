@@ -16,9 +16,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app
-  .use('/static', express.static(path.join(__dirname, '/public')))
+  .use('/static', express.static(path.join(__dirname, '/client/build')))
   .set('view engine', 'html')
-  .get('/', (req, res) => res.render('public'));
+  .get('*', (req, res) =>
+    res.sendFile(path.join(__dirname + 'client/build/index.html'))
+  );
 
 const url = process.env.MONGO_URL;
 // const url = 'mongodb://jhovahn:password1@ds247852.mlab.com:47852/notes';
