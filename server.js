@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app
-  .use(express.static(path.join(__dirname, 'public')))
+  .use('/static', express.static(path.join(__dirname, 'public')))
   .set('views', path.join(__dirname, 'public'))
   .get('/', (req, res) => res.render('public'));
 
