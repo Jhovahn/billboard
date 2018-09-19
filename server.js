@@ -12,11 +12,11 @@ const bodyParser = require('body-parser');
 
 const app = express();
 app.use(routes);
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.json());
 
 app
-  .use('/static', express.static(path.join(__dirname, '/client/build')))
+  .use(express.static(path.join(__dirname, '/client/build')))
   .get('*', (req, res) =>
     res.sendFile(path.join(__dirname + 'client/build/index.html'))
   );
