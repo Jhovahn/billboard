@@ -17,7 +17,6 @@ app.use(bodyParser.json());
 
 app
   .use('/static', express.static(path.join(__dirname, '/client/build')))
-  .set('view engine', 'html')
   .get('*', (req, res) =>
     res.sendFile(path.join(__dirname + 'client/build/index.html'))
   );
