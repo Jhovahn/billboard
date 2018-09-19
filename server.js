@@ -4,7 +4,6 @@ const axios = require('axios');
 const $ = require('cheerio');
 const path = require('path');
 require('dotenv').config();
-let latest = 'September 21, 2018';
 
 const MongoClient = require('mongodb').MongoClient;
 const port = process.env.PORT || 8000;
@@ -12,8 +11,6 @@ const bodyParser = require('body-parser');
 
 const app = express();
 app.use(routes);
-// app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, 'client/build')));
 app.get('*', (req, res) =>
@@ -21,7 +18,6 @@ app.get('*', (req, res) =>
 );
 
 const url = process.env.MONGO_URL;
-// const url = 'mongodb://jhovahn:password1@ds247852.mlab.com:47852/notes';
 
 routes.get('/database', (req, res) => {
   MongoClient.connect(url, (err, client) => {
@@ -77,20 +73,13 @@ routes.get('/albums', (req, res) => {
       }
       res.send({ date: date, result: result });
 
-      console.log('before', latest);
-
-      if (date !== latest) {
-        MongoClient.connect(url, (err, client) => {
-          if (err) throw err;
-          let db = client.db('notes');
-          console.log(`post`, db.collection('billboard'));
-          db.collection('billboard').insertOne({ date: date, list: result });
-        });
-      }
+      MongoClient.connect(url, (err, client) => {
+        if (err) throw err;
+        let db = client.db('notes');
+        db.collection('billboard').insertOne({ date: date, list: result });
+      });
 
       latest = date;
-
-      console.log('after', latest);
     })
     .catch(err => console.log(err));
 });

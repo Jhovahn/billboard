@@ -22,7 +22,8 @@
     }
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "react-scripts start",
+    "server": "node server",
     "heroku-postbuild": "npm install && npm run build",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
