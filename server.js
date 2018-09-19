@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 app
   .use(express.static(path.join(__dirname, 'public')))
   .set('views', path.join(__dirname, 'public'))
-  .get('/', (req, res) => res.render('/public/index'));
+  .get('/', (req, res) => res.render('public'));
 
 const url = process.env.MONGO_URL;
 // const url = 'mongodb://jhovahn:password1@ds247852.mlab.com:47852/notes';
